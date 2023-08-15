@@ -1,0 +1,7 @@
+<%= form_for(@day, url: week_days_path) do |f| %>
+  <%= f.label :date, class: "fs-5 fw-medium" %>
+  <%= f.date_select :date %>
+  <%= f.submit class: 'btn btn-success' %>
+<% end %>
+
+<%= link_to 'Back to week', edit_week_path(@week), class: 'btn btn-primary' %>

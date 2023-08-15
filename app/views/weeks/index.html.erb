@@ -1,0 +1,36 @@
+<h1 class="text-center mb-0">All weeks:</h1>
+<p class="text-center text-secondary">Total: <%= total_weeks_hours %></p>
+
+<% @weeks.each_with_index do |week, index| %>
+  <div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div>
+        <h5 class="mb-1">Week <%= index.next %></h5>
+        <p class="text-secondary mb-0">Total: <%= week.total_hours_str %></p>
+      </div>
+      <div>
+        <%= link_to 'Edit week', edit_week_path(week), class: "btn btn-primary"  %>
+        <%= link_to 'Delete week', week_path(week), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: "btn btn-danger"  %>
+      </div>
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        <% week.days.each do |day| %>
+          <li class="list-group-item">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <h5 class="card-title mb-1 me-4"><%= day.date.to_fs(:short) %>:</h5>
+                <%= day.time_ranges.map(&:schedule_str).join(', ') %>
+              </div>
+              <div>
+                Total: <%= day.total_hours_str %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to 'New week', new_week_path, class: "btn btn-success" %>

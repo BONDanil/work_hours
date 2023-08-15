@@ -1,0 +1,15 @@
+<%= form_with model: [@week, @day, @time_range] do |f| %>
+  <div class="mb-3">
+    <%= f.label :time_in, class: "fs-5 fw-medium" %>
+    <%= f.time_select :time_in %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :time_out, class: "fs-5 fw-medium" %>
+    <%= f.time_select :time_out %>
+  </div>
+
+  <%= f.submit class: 'btn btn-success mb-3' %>
+<% end %>
+
+<%= link_to 'Back to day', edit_week_day_path(@week, @day), class: 'btn btn-primary' %>
